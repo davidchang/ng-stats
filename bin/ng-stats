@@ -2,16 +2,15 @@
 
 var program = require('commander'),
   fs = require('fs'),
-  ngmin = require('../main');
+  ngStats = require('../main');
 
 program
   .version(require('../package.json').version)
   .usage('<infile> <outfile>')
-  .option('-d, --dynamic', 'Use dynamic mode')
   .parse(process.argv);
 
 if (program.args.length !== 0 && program.args.length !== 2) {
-  console.error('ngmin should be called with an input and output file, or no arguments if using stdio');
+  console.error('ngStats should be called with an input and output file, or no arguments if using stdio');
   process.exit(1);
 }
 
@@ -25,7 +24,7 @@ if (program.args.length === 2) {
     console.error('Error opening: ' + infile);
     process.exit(1);
   }
-  var generatedCode = ngmin.annotate(content, program);
+  var stats = ngStats.generateStats(content, program);
 
   try {
     fs.writeFileSync(outfile, generatedCode);
@@ -46,6 +45,6 @@ if (program.args.length === 2) {
   });
 
   process.stdin.on('end', function() {
-    process.stdout.write(ngmin.annotate(buffer, program));
+    process.stdout.write(ngStats.generateStats(buffer, program));
   });
 }

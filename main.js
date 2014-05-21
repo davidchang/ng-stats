@@ -1,17 +1,6 @@
+var esprima = require('esprima');
 
-var esprima = require('esprima'),
-  escodegen = require('escodegen'),
-  dynamic = require('ngmin-dynamic'),
-  astral = require('astral')();
-
-// register angular annotator in astral
-require('astral-angular-annotate')(astral);
-
-var annotate = exports.annotate = function (inputCode, options) {
-
-  if (options && options.dynamic) {
-    return dynamic(inputCode);
-  }
+var generateStats = exports.generateStats = function (inputCode) {
 
   var ast = esprima.parse(inputCode, {
     tolerant: true,
@@ -19,19 +8,6 @@ var annotate = exports.annotate = function (inputCode, options) {
     range: true,
     tokens: true
   });
-  // TODO: unstable API, see https://github.com/Constellation/escodegen/issues/10
-  ast = escodegen.attachComments(ast, ast.comments, ast.tokens);
 
-  astral.run(ast);
-
-  var generatedCode = escodegen.generate(ast, {
-    format: {
-      indent: {
-        style: '  '
-      }
-    },
-    comment: true
-  });
-
-  return generatedCode;
+  return inputCode;
 };

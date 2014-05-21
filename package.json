@@ -1,0 +1,36 @@
+{
+  "name": "ng-stats",
+  "description": "AngularJS Statistics Scripts",
+  "version": "0.0.1",
+  "author": "David Chang",
+  "license": "MIT",
+  "main": "main.js",
+  "dependencies": {
+    "escodegen": "~0.0.15",
+    "esprima": "~1.0.2",
+    "estraverse" : "*",
+    "commander": "~1.1.1",
+    "clone": "~0.1.6"
+  },
+  "devDependencies": {
+    "should": "~1.2.1",
+    "mocha": "~1.5.0",
+    "fn-body": "0.0.1",
+    "normalize-fn": "0.0.1"
+  },
+  "keywords": [
+    "angularjs",
+    "stats",
+    "ast"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davidchang/ng-stats"
+  },
+  "bin": {
+    "ngmin": "./bin/ng-stats"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --globals angular,require"
+  }
+}

@@ -8,7 +8,8 @@
   "dependencies": {
     "escodegen": "~0.0.15",
     "esprima": "~1.0.2",
-    "estraverse" : "*",
+    "estraverse" : "1.5.0",
+    "underscore" : "1.6.0",
     "commander": "~1.1.1",
     "clone": "~0.1.6"
   },

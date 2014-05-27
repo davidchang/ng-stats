@@ -2,6 +2,7 @@
 
 var program = require('commander'),
   fs = require('fs'),
+  _ = require('underscore'),
   ngStats = require('../main');
 
 program
@@ -45,6 +46,14 @@ if (program.args.length === 2) {
   });
 
   process.stdin.on('end', function() {
-    process.stdout.write(ngStats.generateStats(buffer, program));
+    var stats = ngStats.generateStats(buffer, program);
+    _.each(stats, function(val, key) {
+      var values = val.join(', ');
+      if (!values.length) {
+        values = 'None';
+      }
+
+      process.stdout.write(key + ': ' + values + '\n');
+    });
   });
 }
